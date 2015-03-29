@@ -1,0 +1,1 @@
+['be', 'been', 'am', 'is', 'are', 'was', 'were', 'have', 'has', 'had', 'do', 'does', 'did', 'to', 'could']

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}"/>
+    <title>Semantic Role Labeler</title>
+</head>
+<body>
+    <header>
+        <h1>Semantic Role Labeler</h1>
+    </header>
+    <p>The labeler gets a set of labeled seed sentences (seed corpus) and a set of unlabeled sentences
+        (expansion corpus)<br>and returns a subset of the expansion corpus with novel annotations.</p>
+    <section id="input">
+        <form method="post" action="{{ url_for('upload') }}" accept-charset=utf8 enctype="multipart/form-data">
+            <section class="in">
+                Please insert a .zip file containing JSON files, each representing a labeled sentence:<br>
+                <input type="file" name="labeled_file">
+            </section>
+			<section class="in">
+                Please insert a .txt file containing unlabeled sentences in CoNLL-X format (separated by a newline):<br>
+                <input type="file" name="unlabeled_file">
+            </section>
+            <input class="in" type="submit" value="Start Labeler"/>
+        </form>
+    </section>
+    <p><a href="about/frameSemantics">Read more about this project</a></p>
+    <section id="footnotes">
+        © written by : Efrat Hazani
+        <br>
+        Advisors: prof. Michal Elhadad and Avi Hayoun
+        <br>
+        Based on:
+        <br>
+        Hagen Furstenau and Mirella Lapata, 2012.
+        <a href="http://www.mitpressjournals.org/doi/pdf/10.1162/COLI_a_00087">"Semi-Supervised Semantic Role Labeling via Structural Alignment"</a>,
+        Association for Computational Linguistics.
+    </section>
+</body>
+</html>
