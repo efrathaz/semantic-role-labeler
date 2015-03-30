@@ -21,6 +21,14 @@
                 Please insert a .txt file containing unlabeled sentences in CoNLL-X format (separated by a newline):<br>
                 <input type="file" name="unlabeled_file">
             </section>
+            <section class="in">
+                Please insert an integer value for k (number of best newly labeled sentences for each seed sentence):<br>
+                <input type="number" name="k" min="1">
+            </section>
+            <section class="in">
+                Please insert the value of the threshold for the lexical similarity (a number between 0 and 1):<br>
+                <input type="text" name="threshold" pattern="0.[0-9]*" min="0" max="1">
+            </section>
             <input class="in" type="submit" value="Start Labeler"/>
         </form>
     </section>

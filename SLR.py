@@ -21,14 +21,13 @@ def home():
 def upload():
     unlabeled = request.files['unlabeled_file']
     labeled = request.files['labeled_file']
-    args = request.view_args
-    print('args:')
-    print(args)
-    k = request.args.get('k')
-    if k is None:
+    if request.form['k'] is not '':
+        k = int(request.form['k'])
+    else:
         k = 2
-    threshold = request.args.get('threshold')
-    if threshold is None:
+    if request.form['threshold'] is not '':
+        threshold = float(request.form['threshold'])
+    else:
         threshold = 0.6
 
     # save to upload folder
@@ -40,6 +39,7 @@ def upload():
 
     results = '\n\n'.join(run(k, threshold))
 
+    """
     # remove files from upload folder
     os.remove(os.path.join(app.config['UPLOAD_FOLDER'], 'unlabeled.txt'))
     os.remove(os.path.join(app.config['UPLOAD_FOLDER'], 'labeled.zip'))
@@ -48,7 +48,7 @@ def upload():
         item_path = os.path.join(path, item)
         if os.path.isfile(item_path):
             os.remove(item_path)
-
+    """
     return results
 
 

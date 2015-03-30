@@ -11,11 +11,8 @@ from SLR import app
 
 def init():
     create_stop_words()
-    print('stopwords created')
     create_auxiliaries()
-    print('auxiliaries created')
     upload_lex_models()
-    print('lex model uploaded')
     
 
 def create_stop_words():
