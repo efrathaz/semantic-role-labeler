@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import render_template, request, redirect, url_for
+from time import time
 from methods import *
 from debug import *
 
@@ -57,7 +58,7 @@ def run(k, threshold):
     The main function.
     Returns a list of newly labeled sentences, represented as JSON files
     """
-
+    start_time = time()
     labeled = parse_labeled_sentences()
     unlabeled = parse_unlabeled_sentences()
 
@@ -97,10 +98,11 @@ def run(k, threshold):
             data = get_jason_data(u_tagged)
             results.append(json.dumps(data, indent=4, sort_keys=True, default=lambda x: x.__dict__))
 
+    runtime = time() - start_time
+    print("runtime =  " + str(round(runtime, 2)) + " seconds")
     return results
 
 
 if __name__ == '__main__':
     init()
     app.run(debug=True)
-
