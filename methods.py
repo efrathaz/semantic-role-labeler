@@ -1,12 +1,9 @@
 __author__ = 'efrathaz'
-import os
 import json
 import re
-from zipfile import ZipFile
 from importlib import import_module
 from Sentence import *
 from Word import *
-from SLR import app
 
 
 def init():
@@ -35,7 +32,7 @@ def upload_lex_models():
     mod = import_module('lexDepModel')
     lex_model = mod.Embeddings.load('static/deps.words')
 
-
+"""
 def parse_unlabeled_sentences():
     sentences = []
     with open(app.config['UPLOAD_FOLDER']+'unlabeled.txt', 'r') as file:
@@ -52,9 +49,46 @@ def parse_unlabeled_sentences():
             s.text = text
             sentences.append(s)
     return sentences
+"""
 
 
-def parse_labeled_sentences():
+def parse_unlabeled_sentences_text(text):
+    sentences = []
+    for sen in text.split("\n\n"):
+        s = Sentence()
+        s.depParse = sen
+        t = ""
+        for word in sen.split('\n'):
+            fields = word.split()
+            if len(fields) > 7:
+                s.add_word(Word(fields[0], fields[1], fields[2], fields[3], fields[6], fields[7]))
+                t += " " + fields[1]
+        s.text = t
+        sentences.append(s)
+    return sentences
+
+
+def parse_labeled_sentences_text(text):
+    sentences = []
+    for j in text.split('\n'):
+        json_file = json.loads(j)
+        s = Sentence()
+        words = json_file['depParse'].split('\n')
+        for word in words:
+            fields = word.split()
+            w = Word(fields[0], fields[1], fields[2], fields[3], fields[6], fields[7])
+            s.add_word(w)
+        update_roles(json_file, s)
+        update_fee(json_file, s)
+        s.luName = json_file['luName'].lower()
+        s.luID = int(json_file['luID'])
+        s.frameId = int(json_file['frameID'])
+        s.text = json_file['text']
+        sentences.append(s)
+    return sentences
+
+"""
+def parse_labeled_sentences_zip():
     sentences = []
     archive = ZipFile(app.config['UPLOAD_FOLDER']+'labeled.zip', 'r')
     archive.extractall(app.config['UPLOAD_FOLDER']+'labeled')
@@ -79,6 +113,7 @@ def parse_labeled_sentences():
                 s.text = json_file['text']
                 sentences.append(s)
     return sentences
+"""
 
 
 def update_roles(json_file, sentence):

@@ -13,22 +13,30 @@
         (expansion corpus)<br>and returns a subset of the expansion corpus with novel annotations.</p>
     <section id="input">
         <form method="post" action="{{ url_for('upload') }}" accept-charset=utf8 enctype="multipart/form-data">
-            <section class="in">
-                Please insert a .zip file containing JSON files, each representing a labeled sentence:<br>
-                <input type="file" name="labeled_file">
-            </section>
-			<section class="in">
-                Please insert a .txt file containing unlabeled sentences in CoNLL-X format (separated by a newline):<br>
-                <input type="file" name="unlabeled_file">
-            </section>
-            <section class="in">
-                Please insert an integer value for k (number of best newly labeled sentences for each seed sentence):<br>
-                <input type="number" name="k" min="1">
-            </section>
-            <section class="in">
-                Please insert the value of the threshold for the lexical similarity (a number between 0 and 1):<br>
-                <input type="text" name="threshold" pattern="0.[0-9]*" min="0" max="1">
-            </section>
+            <table>
+                <tr>
+                    <td>
+                        Please insert labeled sentences in json format:<br>
+                        <textarea name="labeled_file" cols="70" rows="10"></textarea>
+                    </td>
+                    <td>
+                        Please insert unlabeled sentences in CoNLL-X format (separated by a newline):<br>
+                        <textarea name="unlabeled_file" cols="70" rows="10" placeholder=""></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Please insert an integer value for k<br>(number of best newly labeled sentences for each seed sentence):<br>
+                        <input type="number" name="k" min="1">
+                    </td>
+                <tr/>
+                <tr>
+                    <td>
+                        Please insert the value of the threshold for the lexical similarity<br>(a number between 0 and 1):<br>
+                        <input type="text" name="threshold" pattern="0.[0-9]*" min="0" max="1">
+                    </td>
+                </tr>
+            </table>
             <input class="in" type="submit" value="Start Labeler"/>
         </form>
     </section>

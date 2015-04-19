@@ -2,10 +2,9 @@ from flask import Flask
 from flask import render_template, request, redirect, url_for
 from time import time
 from methods import *
-from debug import *
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = 'uploaded/'
+# app.config['UPLOAD_FOLDER'] = 'uploaded/'
 
 
 @app.route('/')
@@ -20,36 +19,23 @@ def home():
 
 @app.route('/home', methods=['POST'])
 def upload():
-    unlabeled = request.files['unlabeled_file']
-    labeled = request.files['labeled_file']
-    if request.form['k'] is not '':
-        k = int(request.form['k'])
-    else:
-        k = 2
-    if request.form['threshold'] is not '':
-        threshold = float(request.form['threshold'])
-    else:
-        threshold = 0.6
+    global labeled
+    global unlabeled
 
-    # save to upload folder
-    if unlabeled.filename == '' or labeled.filename == '':
+    if request.form['labeled_file'] == '' or request.form['k'] == '' or request.form['threshold'] == '':
         return 'Error: no input'
+    print(request.form['unlabeled_file'] == '')
+    # default unlabeled sentences file
+    if request.form['unlabeled_file'] == '':
+        with open('static/unlabeled_default.txt', 'r') as file:
+            unlabeled = parse_unlabeled_sentences_text(file.read())
     else:
-        unlabeled.save(os.path.join(app.config['UPLOAD_FOLDER'], 'unlabeled.txt'))
-        labeled.save(os.path.join(app.config['UPLOAD_FOLDER'], 'labeled.zip'))
+        unlabeled = parse_unlabeled_sentences_text(request.form['unlabeled_file'])
 
+    labeled = parse_labeled_sentences_text(request.form['labeled_file'])
+    k = int(request.form['k'])
+    threshold = float(request.form['threshold'])
     results = '\n\n'.join(run(k, threshold))
-
-    """
-    # remove files from upload folder
-    os.remove(os.path.join(app.config['UPLOAD_FOLDER'], 'unlabeled.txt'))
-    os.remove(os.path.join(app.config['UPLOAD_FOLDER'], 'labeled.zip'))
-    path = os.path.join(app.config['UPLOAD_FOLDER'], 'labeled/')
-    for item in os.listdir(path):
-        item_path = os.path.join(path, item)
-        if os.path.isfile(item_path):
-            os.remove(item_path)
-    """
     return results
 
 
@@ -59,9 +45,10 @@ def run(k, threshold):
     Returns a list of newly labeled sentences, represented as JSON files
     """
     start_time = time()
-    labeled = parse_labeled_sentences()
-    unlabeled = parse_unlabeled_sentences()
-
+    # labeled = parse_labeled_sentences_zip()
+    # unlabeled = parse_unlabeled_sentences()
+    for s in unlabeled:
+        s.print_sentence()
     # for every unlabeled sentence u, find maximal alignment with some labeled sentence l
     for u in unlabeled:
         targets = get_target_predicates(u)
@@ -80,13 +67,13 @@ def run(k, threshold):
                     max_l = l
                     max_alignment = alignment
                     max_score = score
-
+                    """
                     # debug
                     print_domain(l, alignment_domain)
                     print_range(u, alignment_range)
                     print_alignment(alignment, score)
                     print()
-
+                    """
             if max_score > 0:
                 # add newly labeled sentence and the assignment score to the list of sentences in l_max
                 u_tagged = assign(max_alignment, max_l, u)
