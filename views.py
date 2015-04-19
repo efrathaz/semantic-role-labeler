@@ -4,7 +4,6 @@ from time import time
 from methods import *
 
 app = Flask(__name__)
-# app.config['UPLOAD_FOLDER'] = 'uploaded/'
 
 
 @app.route('/')
@@ -24,7 +23,7 @@ def upload():
 
     if request.form['labeled_file'] == '' or request.form['k'] == '' or request.form['threshold'] == '':
         return 'Error: no input'
-    print(request.form['unlabeled_file'] == '')
+
     # default unlabeled sentences file
     if request.form['unlabeled_file'] == '':
         with open('static/unlabeled_default.txt', 'r') as file:
@@ -45,10 +44,7 @@ def run(k, threshold):
     Returns a list of newly labeled sentences, represented as JSON files
     """
     start_time = time()
-    # labeled = parse_labeled_sentences_zip()
-    # unlabeled = parse_unlabeled_sentences()
-    for s in unlabeled:
-        s.print_sentence()
+
     # for every unlabeled sentence u, find maximal alignment with some labeled sentence l
     for u in unlabeled:
         targets = get_target_predicates(u)
