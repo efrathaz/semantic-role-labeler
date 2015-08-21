@@ -1,0 +1,31 @@
+1 A a DT DT _ 4 det _ _
+2 bogus bogus JJ JJ _ 4 amod _ _
+3 policeman policeman NN NN _ 4 nn _ _
+4 attempts attempt NNS NNS _ 0 root _ _
+5 to to TO TO _ 6 aux _ _
+6 abduct abduct VB VB _ 4 infmod _ _
+7 two two CD CD _ 8 num _ _
+8 children child NNS NNS _ 6 dobj _ _
+9 . . . . _ 4 punct _ _
+
+1 It it PRP PRP _ 2 nsubj _ _
+2 was be VBD VBD _ 0 root _ _
+3 still still RB RB _ 2 advmod _ _
+4 in in IN IN _ 2 prep _ _
+5 the the DT DT _ 6 det _ _
+6 camera camera NN NN _ 4 pobj _ _
+7 when when WRB WRB _ 11 advmod _ _
+8 ... ... : : _ 11 punct _ _
+9 they they PRP PRP _ 11 nsubj _ _
+10 were be VBD VBD _ 11 cop _ _
+11 abducted abducted NN NN _ 2 advcl _ _
+12 . . . . _ 2 punct _ _
+
+1 ` ` `` `` _ 6 punct _ _
+2 NEWSBOY newsboy NNP NNP _ 3 nn _ _
+3 ABDUCTED abducted NNP NNP _ 4 nn _ _
+4 ON on NNP NNP _ 6 nn _ _
+5 PAPER paper NNP NNP _ 6 nn _ _
+6 ROUND round NNP NNP _ 0 root _ _
+7 . . . . _ 6 punct _ _
+8 '' '' '' '' _ 6 punct _ _

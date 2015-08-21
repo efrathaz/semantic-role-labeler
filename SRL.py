@@ -16,6 +16,11 @@ def home():
     return render_template("Home.html")
 
 
+@app.route('/about')
+def about():
+    return render_template("About.html")
+
+
 @app.route('/home', methods=['POST'])
 def upload():
     global labeled
@@ -88,4 +93,4 @@ def run(k, threshold):
 
 if __name__ == '__main__':
     init()
-    app.run(debug=True)
+    app.run(host='0.0.0.0', debug=True)

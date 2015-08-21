@@ -3,48 +3,6 @@ body {
 	padding: 5px 30px 0px 30px;
 }
 
-h1 {
-    font-size: 30px;
-	text-align: center;
-	padding-bottom: 15px;
-}
-
-#menu {
-	margin: 0px;
-	padding: 0px 0px 8px 0px;
-}
-
-#menu li {
-    display: inline;
-	margin: 0px;
-	padding: 0px;
-}
-
-#menu li a {
-    background-color: white;
-    color: black;
-    padding: 10px 25px 11px;
-    text-decoration: none;
-    border-radius: 4px 4px 0 0;
-	border: 1px solid black;
-	border-bottom-width: 0px;
-}
-
-#menu li a:hover {
-    background-color: #EBEBFF;
-}
-
-#menu li a#current {
-	background-color: #EBEBFF;
-}
-
-#menu li a.other {
-	padding: 10px 25px 10px;
-}
-
-#data {
-	margin: 10px 0px 20px 0px;
-}
 
 #text {
 	height: 50%;

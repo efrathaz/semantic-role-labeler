@@ -199,22 +199,29 @@
                         <a href="https://github.com/efrathaz/semantic-role-labeler">here</a></li>
 					<li>Download the <a href="http://u.cs.biu.ac.il/~yogo/data/syntemb/deps.words.bz2">lexical model</a> 
 						and <b>extract</b> it into the <i>static</i> folder.</li>
+                    <li>To run the application from the command line:  <i>python3 SRL.py</i></li>
 				</ul>
 			</p>
 			<p>
 				<h3>Input format</h3>
-				
+                <ul>
+				    <li>The labeled sentences should be represented as JSONs, separated by a <b>single</b> new line
+                        (<a href="../static/labeled_input_example.txt">example</a>)</li>
+                    <li>The unlabled sentences should be represented in CoNLL-X format, separated by <b>two</b> new lines
+                        (<a href="../static/unlabeled_input_example.txt">example</a>)</li>
+                    <li>The number of newly labeled sentences per seed sentence (k)</li>
+                    <li>The threshold for the <i>lex</i> function (a number between 0 and 1)</li>
+                </ul>
 			</p>
 			<p>
-				
-				
+
 			</p>
 		</div>
 	</section>
 	<section id="footnotes">
-        © written by : Efrat Hazani
+        © Written by : Efrat Hazani
         <br>
-        Advisors: Prof. Michal Elhadad and Avi Hayoun
+        Advisors: Prof. Michael Elhadad and Avi Hayoun
         <br>
         Based on:
         <br>
