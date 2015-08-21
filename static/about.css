@@ -1,16 +1,53 @@
 body {
-	font-family: "Georgia";
-	padding: 5px 30px 0px 30px;
+	font-family: Georgia;
+    padding-left: 5%;
+    padding-right: 5%;
+    font-size: 18px;
 }
 
-
-#text {
-	height: 50%;
-    width: 90%;
-	background-color: #EBEBFF;
-	color: black;
-	border: 1px solid black;
-	padding: 10px;
-	margin-top: 1px;
+h1 {
+    text-align: center;
 }
 
+#data {
+	padding-bottom: 10px;
+}
+
+.chapter {
+	padding-bottom: 5px;
+}
+
+#img1 {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+#img2 {
+    height: 500px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+#img3 {
+    height: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+#img4 {
+    height: 30px;
+    text-align: center;
+}
+
+#img5 {
+    height: 30px;
+    text-align: center;
+}
+
+#footnotes {
+	padding-top: 20px;
+    font-size: 16px;
+}

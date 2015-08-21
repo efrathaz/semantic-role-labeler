@@ -16,11 +16,11 @@
             <table>
                 <tr>
                     <td>
-                        Please insert labeled sentences in json format:<br>
+                        Please insert labeled sentences in json format,<br>separated by a new line:<br>
                         <textarea name="labeled_file" cols="70" rows="10"></textarea>
                     </td>
                     <td>
-                        Please insert unlabeled sentences in CoNLL-X format (separated by a newline):<br>
+                        Please insert unlabeled sentences in CoNLL-X format,<br>separated by two new lines:<br>
                         <textarea name="unlabeled_file" cols="70" rows="10" placeholder=""></textarea>
                     </td>
                 </tr>
@@ -29,8 +29,7 @@
                         Please insert an integer value for k<br>(number of best newly labeled sentences for each seed sentence):<br>
                         <input type="number" name="k" min="1">
                     </td>
-                <tr/>
-                <tr>
+
                     <td>
                         Please insert the value of the threshold for the lexical similarity<br>(a number between 0 and 1):<br>
                         <input type="text" name="threshold" pattern="0.[0-9]*" min="0" max="1">
@@ -40,8 +39,9 @@
             <input class="in" type="submit" value="Start Labeler"/>
         </form>
     </section>
-{#    <p><a href="/About">Read more about this project</a></p>#}
-    <p><a href="{{ url_for('about') }}">Read more about this project</a></p>
+    <section id="about">
+        <p><a href="{{ url_for('about') }}">Read about this project</a></p>
+    </section>
     <section id="footnotes">
         © Written by : Efrat Hazani
         <br>
