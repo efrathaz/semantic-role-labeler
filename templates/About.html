@@ -244,15 +244,172 @@
             <a name="Results"></a>
 			<h2>Results</h2>
 			<p>
-
+				We ran the experiment with the following configurations:
+				<ul>
+				    <li>The labeled data is all the sentences in FrameNet</li>
+                    <li>The unlabeled data is all the sentences in FrameNet which their LU’s start with the letter D</li>
+                    <li>K = 10</li>
+                    <li>Threshold for the lexical similarity = 0.9</li>
+                </ul>
 			</p>
             <p>
-
+				The results of this experiment were approximately:
+				<ul>
+				    <li>33% good results</li>
+                    <li>50% partial results</li>
+                    <li>17% bad results</li>
+                </ul>
 			</p>
 			<p>
-
+				Since the unlabeled sentences were also in the seed data, results where the sentence was labeled according
+				to itself were omitted.
 			</p>
-
+			<p>
+				An example of a good result is:<br>
+				<span style="text-decoration: underline;">LU</span>: doubt.n<br>
+				<span style="text-decoration: underline;">Seed sentence</span>: “He had no <b>doubt</b> of the genuine 
+                affection he had for her.”<br>
+				<span style="text-decoration: underline;">Annotations</span>:
+				<ul>
+				    <li>Cognizer – “He”</li>
+                    <li>Content – “of the genuine affection he had for her”</li>
+                </ul>
+				<span style="text-decoration: underline;">Newly annotated sentence</span>: “I had no <b>doubts</b> 
+                about his musicianship.”<br>
+				<span style="text-decoration: underline;">Annotations</span>:
+				<ul>
+				    <li>Cognizer – “I”</li>
+                    <li>Content – “musicianship”</li>
+                </ul>
+			</p>
+			<p>
+				Another example:<br>
+				<span style="text-decoration: underline;">LU</span>: donate.v<br>
+				<span style="text-decoration: underline;">Seed sentence</span>: “In July, we reported that the Trust had <b>donated</b> £400,000 towards the
+				cost of improving library facilities at the University.”<br>
+				<span style="text-decoration: underline;">Annotations</span>:
+				<ul>
+				    <li>Donor – “the Trust”</li>
+                    <li>Theme – “£400,000 towards the cost of improving library facilities at the University”</li>
+                </ul>
+				<span style="text-decoration: underline;">Newly annotated sentence</span>: “Each named designer is <b>donating</b> an outfit to be auctioned off.”<br>
+				<span style="text-decoration: underline;">Annotations</span>:
+				<ul>
+				    <li>Donor – “designer”</li>
+                    <li>Content – “outfit”</li>
+                </ul>
+			</p>
+			<p>
+				Some of the results were partially correct, for example:<br>
+				<span style="text-decoration: underline;">LU</span>: descend.v<br>
+				<span style="text-decoration: underline;">Seed sentence</span>: “The track <b>descends</b> back to the start.”<br>
+				<span style="text-decoration: underline;">Annotations</span>:
+				<ul>
+				    <li>Road – “The track”</li>
+                    <li>Goal – “back to the start”</li>
+                </ul>
+				<span style="text-decoration: underline;">Newly annotated sentence</span>: “The road suddenly <b>descended</b> into a valley shaded by pines and oaks.”<br>
+				<span style="text-decoration: underline;">Annotations</span>:
+				<ul>
+				    <li>Road – “road”</li>
+                    <li>Goal – “suddenly” (should be “valley”)</li>
+                </ul>
+				Here are the dependency trees for the two sentences:<br>
+				<img id="img6" src="../static/images/6.jpg"><br>
+				The problem here is that the Goal in the seed sentence is preceded with an adverbial modifier, and
+				since we are only looking at the root of the LU’s subtree, we are looking at the path {ADVMOD} instead
+				of the path {PREP, POBJ}. In the seed sentence the adverb is modifying a prepositional phrase, where
+				in the unlabeled sentence the adverb is modifying a verb.
+			</p>
+			<p>
+				Another example of a partially correct result:<br>
+				<span style="text-decoration: underline;">LU</span>: dash.v<br>
+				<span style="text-decoration: underline;">Seed sentence</span>: “She implored as he <b>dashed</b> into the bathroom.”<br>
+				<span style="text-decoration: underline;">Annotations</span>:
+				<ul>
+				    <li>Self_mover – “he”</li>
+                    <li>Goal – “into the bathroom”</li>
+                </ul>
+				<span style="text-decoration: underline;">Newly annotated sentence</span>: “With alarming speed a large moth <b>dashed</b> at the candle.”<br>
+				<span style="text-decoration: underline;">Annotations</span>:
+				<ul>
+				    <li>Self_mover – “moth”</li>
+                    <li>Goal – “speed” (should be “candle”)</li>
+                </ul>
+				Here the annotation of “moth” as Self_mover is correct, but the annotation of “speed” as Goal is not,
+				and it can be easily explained by looking at the dependency graphs of the two sentences:<br>
+				<img id="img7" src="../static/images/7.jpg"><br>
+				The path from “dashed” to “speed” is the same as the path from “dashed” to “candle”: {PREP, POBJ}.
+				In this case maybe a better lexical function would have led to better results.
+			</p>
+			<p>
+				Some of the results were incorrect, for example:<br>
+				<span style="text-decoration: underline;">LU</span>: departure.n<br>
+				<span style="text-decoration: underline;">Seed sentence</span>: “East German <b>departure</b> from Warsaw Pact.”<br>
+				<span style="text-decoration: underline;">Annotations</span>:
+				<ul>
+				    <li>Theme – “East German”</li>
+                    <li>Source – “from Warsaw Pact”</li>
+                </ul>
+				<span style="text-decoration: underline;">Newly annotated sentence</span>: “What had accounted for the nine-day gap between this date and
+				the night of his eventual <b>departure</b> for France?”<br>
+				<span style="text-decoration: underline;">Annotations</span>:
+				<ul>
+				    <li>Theme – “eventual” (should be “his”)</li>
+                    <li>Source – “France” (the annotation should be “Goal” instead of “Source”)</li>
+                </ul>
+				This can be explained by looking at the dependency trees of the two sentences:<br>
+				<img id="img8" src="../static/images/8.jpg"><br>
+				In the seed sentence, “German departure” has the same meaning as “Germany’s departure” (thus “Germany”
+				is an <b>implicit</b> LU in this sentence). “German” is an attributive adjective of “departure”, and so
+				is “eventual”. However, “his” is a possessive of “departure”. This explains the wrong annotation of the
+				Theme role.<br>
+				The other annotation error stems from the fact that “from” and “for” are both prepositions, and the
+				labeler doesn’t know that the word “from” is associated with Source while the word “for” is associated
+				with Goal or Destination.
+			</p>
+			<p>
+				Some of the incorrect results are more difficult to explain, for example:<br>
+				<span style="text-decoration: underline;">LU</span>: deposit.v<br>
+				<span style="text-decoration: underline;">Seed sentence</span>: “The proportion of fat <b>deposited</b> on your body will reduce in a most dramatic
+				way, much more so than with almost any other diet and exercise programme.”<br>
+				<span style="text-decoration: underline;">Annotations</span>:
+				<ul>
+				    <li>Theme – “The proportion of fat”</li>
+                    <li>Goal – “on your body”</li>
+                </ul>
+				<span style="text-decoration: underline;">Newly annotated sentence</span>: “that proportion of sulphur dioxide not <B>deposited</b> locally will
+				be diffused in the atmosphere and, through oxidation, will be transformed into sulphates”<br>
+				<span style="text-decoration: underline;">Annotations</span>:
+				<ul>
+				    <li>Theme – “locally” (should be “proportion”)</li>
+                    <li>Goal – “be” (there is no LU for Goal in this sentence)</li>
+                </ul>
+				The dependency trees of these sentences are:<br>
+				<img id="img9" src="../static/images/9.jpg"><br>
+				Here the reason for the wrong annotation is not as clear.
+			</p>
+			<p>
+				In conclusion, the main causes for incorrect annotations are:
+				<ul>
+				    <li>When there are more than one possible path from FEE to an FE, the lexical function is not
+					accurate enough to choose the right path</li>
+                    <li>The labeler does not distinguish between prepositions, thus annotate the FEs with the wrong
+					role (“destination” or “goal” instead of “source”, etc.)</li>
+                    <li>The fact that there are implicit LUs which effect the structure of the sentence</li>
+                </ul>
+			</p>
+			<p>
+				Points for improvement:
+				<ul>
+				    <li>Check propositions. Adding a classification of prepositions according to possible roles,
+					and checking that the propositions in the two sentences have the same classification can improve
+					annotation significantly</li>
+                    <li>Using a better lexical function, and consider part of speech in the comparison</li>
+                    <li>Annotating the whole subtree of the FEs and not only the root will lead to a more informative
+					and accurate annotation</li>
+                </ul>
+			</p>
 		</div>
 	</section>
 	<section id="footnotes">
